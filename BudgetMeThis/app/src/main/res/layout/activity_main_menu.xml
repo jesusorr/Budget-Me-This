@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mostro.rangel.budgetmethis.MainMenu">
+
+    <Button
+        android:id="@+id/addExpenseButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="312dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="100dp"
+        android:onClick="goToAddExpense"
+        android:text="Add Expense"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/summaryButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:onClick="goToSummary"
+        android:text="Summary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/settingsButton"
+        app:layout_constraintTop_toBottomOf="@+id/addExpenseButton" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:onClick="goToSettings"
+        android:text="Settings"
+        app:layout_constraintLeft_toRightOf="@+id/summaryButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addExpenseButton" />
+
+</android.support.constraint.ConstraintLayout>
