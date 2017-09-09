@@ -1,11 +1,9 @@
 package com.mostro.rangel.budgetmethis;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,7 +53,7 @@ public class AddExpensePage extends AppCompatActivity {
                         ((EditText) findViewById(R.id.costInput)).getText().toString(),
                         ((Spinner) findViewById(R.id.categoriesInput)).getSelectedItem().toString(),
                         ((Spinner) findViewById(R.id.subcategoriesInput)).getSelectedItem().toString(),
-                        ((EditText) findViewById(R.id.descriptionInput)).getText().toString());
+                        ((EditText) findViewById(R.id.descriptionInput)).getText().toString(), null);
 
                 StringRequest request = new StringRequest(Request.Method.POST,
                         url_create_expense,

@@ -8,13 +8,15 @@ public class ExpenseObject {
     private String category;
     private String subcategory;
     private String description;
+    private String date;
 
-    public ExpenseObject(String title, String cost, String category, String subcategory, String description) {
+    public ExpenseObject(String title, String cost, String category, String subcategory, String description, String date) {
         this.title = title;
         this.cost = cost;
         this.category = category;
         this.subcategory = subcategory;
         this.description = description;
+        this.date = date;
     }
 
     public String getTitle() {
@@ -55,5 +57,18 @@ public class ExpenseObject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return title + " " + cost + " " + category + " " + subcategory;
     }
 }

@@ -7,7 +7,8 @@ public enum Subcategories {
     VIDEOGAMES("Video Games"),
     HEALTH("Health"),
     FOOD_OUT("Food Out"),
-    GOODS("Goods");
+    GOODS("Goods"),
+    EVENTS("Events");
 
     private final String text;
 

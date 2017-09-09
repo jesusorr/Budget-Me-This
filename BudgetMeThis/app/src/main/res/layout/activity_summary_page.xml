@@ -2,48 +2,172 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mostro.rangel.budgetmethis.SummaryPage">>
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:fillViewport="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:weightSum="1"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
 
         <Spinner
-            android:id="@+id/categoriesInput"
+            android:id="@+id/monthInput"
             style="@android:style/Widget.Material.Light.Spinner"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="50dp"
-            android:layout_below="@+id/titleInput"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="7dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/yearInput"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoryInputLAbel" />
+            android:layout_marginStart="8dp" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/yearInput"
             style="@android:style/Widget.Material.Light.Spinner"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoryInputLAbel"
-            android:layout_alignTop="@+id/categoriesInput"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="20dp" />
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            app:layout_constraintLeft_toRightOf="@+id/monthInput"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="8dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/billsChartLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly Bills"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="120dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="120dp"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/billsPieChart"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/billsChartLabel" />
+
+        <TextView
+            android:id="@+id/housingChartLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly Housing"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/billsPieChart"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="20dp"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/housingPieChart"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/housingChartLabel" />
+
+        <TextView
+            android:id="@+id/entertainmentChartLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly Entertainment"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/housingPieChart"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="20dp"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/entertainmentPieChart"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/entertainmentChartLabel" />
+
+        <TextView
+            android:id="@+id/savingsChartLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly Savings"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/entertainmentPieChart"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="20dp"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/savingsPieChart"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/savingsChartLabel" />
+
+        <TextView
+            android:id="@+id/extrasChartLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly Extras"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/savingsPieChart"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="20dp"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/extrasPieChart"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/extrasChartLabel" />
 
 
-        </LinearLayout>
-
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </ScrollView>
