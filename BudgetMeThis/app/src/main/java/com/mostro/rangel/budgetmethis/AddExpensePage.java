@@ -25,8 +25,6 @@ import java.util.Map;
 
 public class AddExpensePage extends AppCompatActivity {
 
-    private ExpenseObject expenseObject;
-
     // url to create new product
     private static String url_create_expense = "http://192.168.0.10/create_expense.php";
 
@@ -48,7 +46,7 @@ public class AddExpensePage extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
 
-                expenseObject = new ExpenseObject(
+                ExpenseObject expenseObject = new ExpenseObject(
                         ((EditText) findViewById(R.id.titleInput)).getText().toString(),
                         ((EditText) findViewById(R.id.costInput)).getText().toString(),
                         ((Spinner) findViewById(R.id.categoriesInput)).getSelectedItem().toString(),
@@ -76,6 +74,9 @@ public class AddExpensePage extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+
+                                QueuingExpenseService queuingExpenseService = new QueuingExpenseService(getApplicationContext());
+                                queuingExpenseService.queueExpense(expenseObject);
 
                             }
                         }

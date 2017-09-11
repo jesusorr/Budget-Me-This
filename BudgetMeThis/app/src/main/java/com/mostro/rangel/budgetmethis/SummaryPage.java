@@ -1,11 +1,9 @@
 package com.mostro.rangel.budgetmethis;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.os.Debug;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,17 +14,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,9 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import android.util.Log;
-import android.widget.TextView;
 
 public class SummaryPage extends AppCompatActivity {
 
@@ -76,7 +67,6 @@ public class SummaryPage extends AppCompatActivity {
         yearInput.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, years));
         setSpinnersToCurrentDate();
 
-        //TODO: When this happens it does it twice and the data is wrong. To fix it  have to change month and change it back
         monthInput.setOnItemSelectedListener(new MYonItemSelectItem());
         yearInput.setOnItemSelectedListener(new MYonItemSelectItem());
 
@@ -89,47 +79,45 @@ public class SummaryPage extends AppCompatActivity {
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         List<ExpenseObject> myExpenses = new ArrayList<>();
+        StoringExpensesService storingExpensesService = new StoringExpensesService(getApplicationContext(), getFilesDir());
 
         StringRequest request = new StringRequest(Request.Method.POST, url_get_expenses_bymonthyear,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            JSONArray expenses = jsonResponse.getJSONArray("expenses");
-                            for(int i = 0; i< expenses.length(); i++) {
-                                JSONObject expense = expenses.getJSONObject(i);
+                            readJsonResponse(response, myExpenses);
 
-                                myExpenses.add(new ExpenseObject(expense.getString("title"),
-                                        expense.getString("cost"), expense.getString("category"),
-                                        expense.getString("subcategory"), expense.getString("description"),
-                                        expense.getString("date_added")));
-                            }
-
-                            //TODO: Calculate all statistics
-                            List<ExpenseObject> housing = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("housing")).collect(Collectors.toList());
-                            List<ExpenseObject> bills = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("bills")).collect(Collectors.toList());
-                            List<ExpenseObject> entertainment = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("entertainment")).collect(Collectors.toList());
-                            List<ExpenseObject> savings = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("savings")).collect(Collectors.toList());
-                            List<ExpenseObject> extras = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("extra")).collect(Collectors.toList());
-
-                            calculateStatisticsAndGraph(R.id.billsPieChart, bills, billsPortionPan, new int[] {ColorIntegers.billsColor1, ColorIntegers.billsColor2});
-                            calculateStatisticsAndGraph(R.id.housingPieChart, housing, housingPortionPan, new int[] {ColorIntegers.housingColor1, ColorIntegers.housingColor2});
-                            calculateStatisticsAndGraph(R.id.entertainmentPieChart, entertainment, entertainmentPortionPan, new int[] {ColorIntegers.entertainmentColor1, ColorIntegers.entertainmentColor2});
-                            calculateStatisticsAndGraph(R.id.savingsPieChart, savings, savingsPortionPan, new int[] {ColorIntegers.savingsColor1, ColorIntegers.savingsColor2});
-                            calculateStatisticsAndGraph(R.id.extrasPieChart, extras, extraPortionPan, new int[] {ColorIntegers.extraColor1, ColorIntegers.extraColor2});
+                            processAndPublishStatistics(myExpenses);
 
                         }
                         catch (JSONException exception) {
                             exception.printStackTrace();
                         }
 
+                        storingExpensesService.storeExpenses(response);
+
+                        String responsesss = storingExpensesService.readStoredExpenses();
+
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
+
+                        String response = storingExpensesService.readStoredExpenses();
+
+                        if (response != null) {
+                            try {
+                                readJsonResponse(response, myExpenses);
+
+                                processAndPublishStatistics(myExpenses);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
                     }
                 }) {
             @Override
@@ -141,6 +129,33 @@ public class SummaryPage extends AppCompatActivity {
             }
         };
         requestQueue.add(request);
+    }
+
+    private void processAndPublishStatistics(List<ExpenseObject> myExpenses) {
+        List<ExpenseObject> housing = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("housing")).collect(Collectors.toList());
+        List<ExpenseObject> bills = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("bills")).collect(Collectors.toList());
+        List<ExpenseObject> entertainment = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("entertainment")).collect(Collectors.toList());
+        List<ExpenseObject> savings = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("savings")).collect(Collectors.toList());
+        List<ExpenseObject> extras = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("extra")).collect(Collectors.toList());
+
+        calculateStatisticsAndGraph(R.id.billsPieChart, bills, billsPortionPan, new int[] {ColorIntegers.billsColor1, ColorIntegers.billsColor2});
+        calculateStatisticsAndGraph(R.id.housingPieChart, housing, housingPortionPan, new int[] {ColorIntegers.housingColor1, ColorIntegers.housingColor2});
+        calculateStatisticsAndGraph(R.id.entertainmentPieChart, entertainment, entertainmentPortionPan, new int[] {ColorIntegers.entertainmentColor1, ColorIntegers.entertainmentColor2});
+        calculateStatisticsAndGraph(R.id.savingsPieChart, savings, savingsPortionPan, new int[] {ColorIntegers.savingsColor1, ColorIntegers.savingsColor2});
+        calculateStatisticsAndGraph(R.id.extrasPieChart, extras, extraPortionPan, new int[] {ColorIntegers.extraColor1, ColorIntegers.extraColor2});
+    }
+
+    private void readJsonResponse(String response, List<ExpenseObject> myExpenses) throws JSONException {
+        JSONObject jsonResponse = new JSONObject(response);
+        JSONArray expenses = jsonResponse.getJSONArray("expenses");
+        for(int i = 0; i< expenses.length(); i++) {
+            JSONObject expense = expenses.getJSONObject(i);
+
+            myExpenses.add(new ExpenseObject(expense.getString("title"),
+                    expense.getString("cost"), expense.getString("category"),
+                    expense.getString("subcategory"), expense.getString("description"),
+                    expense.getString("date_added")));
+        }
     }
 
     // It calculates the statistics and the prints in graph
