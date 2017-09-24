@@ -2,6 +2,7 @@ package com.mostro.rangel.budgetmethis;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -50,12 +52,9 @@ public class AddExpensePage extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
 
-                expenseObject = new ExpenseObject( getLocalBluetoothName(),
-                        ((EditText) findViewById(R.id.titleInput)).getText().toString(),
-                        ((EditText) findViewById(R.id.costInput)).getText().toString(),
-                        ((Spinner) findViewById(R.id.categoriesInput)).getSelectedItem().toString(),
-                        ((Spinner) findViewById(R.id.subcategoriesInput)).getSelectedItem().toString(),
-                        ((EditText) findViewById(R.id.descriptionInput)).getText().toString(), null);
+                boolean valid = validateAndExtractExpense();
+
+                if (!valid) return;
 
                 StringRequest request = new StringRequest(Request.Method.POST,
                         url_create_expense,
@@ -100,6 +99,47 @@ public class AddExpensePage extends AppCompatActivity {
 
         });
 
+    }
+
+    private boolean validateAndExtractExpense() {
+
+        EditText titleInput = (EditText) findViewById(R.id.titleInput);
+        EditText costInput = (EditText) findViewById(R.id.costInput);
+        Spinner categoriesInput = (Spinner) findViewById(R.id.categoriesInput);
+        Spinner subcategoriesInput = (Spinner) findViewById(R.id.subcategoriesInput);
+        EditText descriptionInput = (EditText) findViewById(R.id.descriptionInput);
+
+        if (validateFields(titleInput, costInput, categoriesInput)) return false;
+
+        expenseObject = new ExpenseObject( getLocalBluetoothName(),
+                titleInput.getText().toString(),
+                costInput.getText().toString(),
+                categoriesInput.getSelectedItem().toString(),
+                subcategoriesInput.getSelectedItem().toString(),
+                descriptionInput.getText().toString(), null);
+
+        return true;
+    }
+
+    private boolean validateFields(EditText titleInput, EditText costInput, Spinner categoriesInput) {
+        boolean valid = true;
+        if(titleInput.getText().toString().trim().equals("")) {
+            titleInput.setError("A title is required");
+            valid = false;
+        }
+
+        if(costInput.getText().toString().trim().equals("")) {
+            costInput.setError("A cost is required");
+            valid = false;
+        }
+
+        if(categoriesInput.getSelectedItem().toString().equals("None")) {
+            TextView errorText = (TextView) categoriesInput.getSelectedView();
+            errorText.setError("A category is required");
+            valid = false;
+        }
+        if (!valid) return true;
+        return false;
     }
 
     public String getLocalBluetoothName() {
