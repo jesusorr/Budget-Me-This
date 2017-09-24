@@ -3,6 +3,7 @@ package com.mostro.rangel.budgetmethis;
 
 public class ExpenseObject {
 
+    private String userName;
     private String title;
     private String cost;
     private String category;
@@ -10,13 +11,22 @@ public class ExpenseObject {
     private String description;
     private String date;
 
-    public ExpenseObject(String title, String cost, String category, String subcategory, String description, String date) {
+    public ExpenseObject(String userName, String title, String cost, String category, String subcategory, String description, String date) {
+        this.userName = userName;
         this.title = title;
         this.cost = cost;
         this.category = category;
         this.subcategory = subcategory;
         this.description = description;
         this.date = date;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getTitle() {

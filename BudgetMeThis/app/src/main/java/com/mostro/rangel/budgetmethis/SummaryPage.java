@@ -1,9 +1,7 @@
 package com.mostro.rangel.budgetmethis;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Debug;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,17 +14,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -142,7 +136,7 @@ public class SummaryPage extends AppCompatActivity {
         for(int i = 0; i< expenses.length(); i++) {
             JSONObject expense = expenses.getJSONObject(i);
 
-            myExpenses.add(new ExpenseObject(expense.getString("title"),
+            myExpenses.add(new ExpenseObject(expense.getString("user_name"), expense.getString("title"),
                     expense.getString("cost"), expense.getString("category"),
                     expense.getString("subcategory"), expense.getString("description"),
                     expense.getString("date_added")));

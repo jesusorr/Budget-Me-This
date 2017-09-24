@@ -1,8 +1,10 @@
 package com.mostro.rangel.budgetmethis;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,7 +50,7 @@ public class AddExpensePage extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
 
-                expenseObject = new ExpenseObject(
+                expenseObject = new ExpenseObject( getLocalBluetoothName(),
                         ((EditText) findViewById(R.id.titleInput)).getText().toString(),
                         ((EditText) findViewById(R.id.costInput)).getText().toString(),
                         ((Spinner) findViewById(R.id.categoriesInput)).getSelectedItem().toString(),
@@ -83,6 +85,7 @@ public class AddExpensePage extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> parameters = new HashMap<>();
+                        parameters.put("user_name", expenseObject.getUserName());
                         parameters.put("title", expenseObject.getTitle());
                         parameters.put("cost", expenseObject.getCost());
                         parameters.put("category", expenseObject.getCategory());
@@ -98,4 +101,18 @@ public class AddExpensePage extends AppCompatActivity {
         });
 
     }
+
+    public String getLocalBluetoothName() {
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        // if device does not support Bluetooth
+        if(mBluetoothAdapter == null){
+            Log.d("NOPE","device does not support bluetooth");
+        }
+
+        String name =  mBluetoothAdapter.getName();
+
+        return name.substring(0, name.indexOf('\''));
+    }
+
 }
