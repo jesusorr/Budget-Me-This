@@ -35,9 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import android.util.Log;
-import android.widget.TextView;
-
 public class SummaryPage extends AppCompatActivity {
 
     private static String url_get_all_expenses = "http://192.168.0.10/get_all_expenses.php";
@@ -136,7 +133,8 @@ public class SummaryPage extends AppCompatActivity {
         for(int i = 0; i< expenses.length(); i++) {
             JSONObject expense = expenses.getJSONObject(i);
 
-            myExpenses.add(new ExpenseObject(expense.getString("user_name"), expense.getString("title"),
+            myExpenses.add(new ExpenseObject(expense.getString("id"),
+                    expense.getString("user_name"), expense.getString("title"),
                     expense.getString("cost"), expense.getString("category"),
                     expense.getString("subcategory"), expense.getString("description"),
                     expense.getString("date_added")));

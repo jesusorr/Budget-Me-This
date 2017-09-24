@@ -111,7 +111,7 @@ public class AddExpensePage extends AppCompatActivity {
 
         if (validateFields(titleInput, costInput, categoriesInput)) return false;
 
-        expenseObject = new ExpenseObject( getLocalBluetoothName(),
+        expenseObject = new ExpenseObject( null, getLocalBluetoothName(),
                 titleInput.getText().toString(),
                 costInput.getText().toString(),
                 categoriesInput.getSelectedItem().toString(),
