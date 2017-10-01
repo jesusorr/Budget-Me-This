@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -138,6 +139,12 @@ public class SummaryPage extends AppCompatActivity {
 
     private void readJsonResponse(String response, List<ExpenseObject> myExpenses) throws JSONException {
         JSONObject jsonResponse = new JSONObject(response);
+
+        if(!jsonResponse.has("expenses")) {
+            showMessageToast("No budget input for this month");
+            return;
+        }
+
         JSONArray expenses = jsonResponse.getJSONArray("expenses");
         for(int i = 0; i< expenses.length(); i++) {
             JSONObject expense = expenses.getJSONObject(i);
@@ -211,6 +218,8 @@ public class SummaryPage extends AppCompatActivity {
         }
     }
 
-
+    public void showMessageToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
 
 }

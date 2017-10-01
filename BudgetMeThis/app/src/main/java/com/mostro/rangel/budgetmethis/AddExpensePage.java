@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -65,6 +66,8 @@ public class AddExpensePage extends AppCompatActivity {
                                 try {
                                     JSONObject jsonResponse = new JSONObject(response);
                                     String message = jsonResponse.getString("message");
+
+                                    showMessageToast("Expense was added to Budget");
 
                                     Intent intent = new Intent(view.getContext(), MainMenu.class);
                                     startActivity(intent);
@@ -153,6 +156,10 @@ public class AddExpensePage extends AppCompatActivity {
         String name =  mBluetoothAdapter.getName();
 
         return name.substring(0, name.indexOf('\''));
+    }
+
+    public void showMessageToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 }
