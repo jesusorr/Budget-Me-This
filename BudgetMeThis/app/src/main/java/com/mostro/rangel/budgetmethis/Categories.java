@@ -5,7 +5,10 @@ public enum Categories {
     HOUSING("Housing"),
     BILLS("Bills"),
     SAVINGS("Savings"),
+    TRAVEL_SAVINGS("VacationSavings"),
     ENTERTAINMENT("Entertainment"),
+    ORI_EXPENSES("OriExpenses"),
+    JESUS_EXPENSES("JesusExpenses"),
     EXTRA("Extra");
 
     private final String text;

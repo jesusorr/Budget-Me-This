@@ -4,7 +4,7 @@ public enum Subcategories {
     None("None"),
     GROCERIES("Groceries"),
     CLOTHING("Clothing"),
-    VIDEOGAMES("Video Games"),
+    VIDEO_GAMES("VideoGames"),
     HEALTH("Health"),
     FOOD_OUT("Food Out"),
     GOODS("Goods"),

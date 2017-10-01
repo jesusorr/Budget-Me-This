@@ -43,12 +43,15 @@ public class SummaryPage extends AppCompatActivity {
     //TODO: CHeck current year and add it to the list;
     List<String> years = Arrays.asList("2017");
 
-    private int fullSalary = 5800;
-    private Double billsPortionPan = fullSalary * 0.4;
-    private Double housingPortionPan = fullSalary * 0.3;
-    private Double entertainmentPortionPan = fullSalary * 0.1;
+    private int fullSalary = 5780;
+    private Double billsPortionPan = fullSalary * 0.48;
+    private Double housingPortionPan = fullSalary * 0.15;
+    private Double entertainmentPortionPan = fullSalary * 0.07;
     private Double savingsPortionPan = fullSalary * 0.1;
     private Double extraPortionPan = fullSalary * 0.1;
+    private Double oriPersonalPortionPan = fullSalary * 0.025;
+    private Double jesusPersonalPortionPan = fullSalary * 0.025;
+    private Double vacationSavingsPortionPan = fullSalary * 0.05;
 
     Spinner monthInput;
     Spinner yearInput;
@@ -119,12 +122,18 @@ public class SummaryPage extends AppCompatActivity {
         List<ExpenseObject> entertainment = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("entertainment")).collect(Collectors.toList());
         List<ExpenseObject> savings = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("savings")).collect(Collectors.toList());
         List<ExpenseObject> extras = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("extra")).collect(Collectors.toList());
+        List<ExpenseObject> oriPersonal = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("oriexpenses")).collect(Collectors.toList());
+        List<ExpenseObject> jesusPersonal = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("jesusexpenses")).collect(Collectors.toList());
+        List<ExpenseObject> vacationSavings = myExpenses.stream().filter(e -> e.getCategory().toLowerCase().equals("vacationsavings")).collect(Collectors.toList());
 
         calculateStatisticsAndGraph(R.id.billsPieChart, bills, billsPortionPan, new int[] {ColorIntegers.billsColor1, ColorIntegers.billsColor2});
         calculateStatisticsAndGraph(R.id.housingPieChart, housing, housingPortionPan, new int[] {ColorIntegers.housingColor1, ColorIntegers.housingColor2});
         calculateStatisticsAndGraph(R.id.entertainmentPieChart, entertainment, entertainmentPortionPan, new int[] {ColorIntegers.entertainmentColor1, ColorIntegers.entertainmentColor2});
         calculateStatisticsAndGraph(R.id.savingsPieChart, savings, savingsPortionPan, new int[] {ColorIntegers.savingsColor1, ColorIntegers.savingsColor2});
         calculateStatisticsAndGraph(R.id.extrasPieChart, extras, extraPortionPan, new int[] {ColorIntegers.extraColor1, ColorIntegers.extraColor2});
+        calculateStatisticsAndGraph(R.id.oriPersonalPieChart, oriPersonal, oriPersonalPortionPan, new int[] {ColorIntegers.oriPersonalColor1, ColorIntegers.oriPersonalColor2});
+        calculateStatisticsAndGraph(R.id.jesusPersonalPieChart, jesusPersonal, jesusPersonalPortionPan, new int[] {ColorIntegers.jesusPersonalColor1, ColorIntegers.jesusPersonalColor2});
+        calculateStatisticsAndGraph(R.id.vacationSavingsPieChart, vacationSavings, vacationSavingsPortionPan, new int[] {ColorIntegers.vacationSavingsColor1, ColorIntegers.vacationSavingsColor2});
     }
 
     private void readJsonResponse(String response, List<ExpenseObject> myExpenses) throws JSONException {
