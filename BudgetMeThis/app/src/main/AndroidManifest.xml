@@ -2,10 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mostro.rangel.budgetmethis">
 
+    <uses-sdk android:minSdkVersion="8" />
+
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -27,8 +31,8 @@
         <activity
             android:name=".SettingsPage"
             android:label="Settings"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainMenu">
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainMenu" />
@@ -36,8 +40,8 @@
         <activity
             android:name=".AddExpensePage"
             android:label="Add Expense"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainMenu">
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainMenu" />
@@ -45,12 +49,14 @@
         <activity
             android:name=".SummaryPage"
             android:label="Summary Report"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainMenu">
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainMenu" />
         </activity>
+        <activity android:name=".CountersPage" />
+        <activity android:name=".SearchParametersPage"></activity>
     </application>
 
 </manifest>

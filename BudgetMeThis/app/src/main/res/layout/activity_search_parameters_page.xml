@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mostro.rangel.budgetmethis.SearchParametersPage">
+
+    <TextView
+        android:id="@+id/searchDayLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Day"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="24dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/searchCategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchDayInput"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/searchUserLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchCategoryInput"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="30dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/searchSubcategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subcategory"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchYearInput"
+        android:layout_marginRight="50dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/searchMonthLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Month"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toRightOf="@+id/searchDayLabel"
+        android:layout_marginLeft="80dp" />
+
+    <TextView
+        android:id="@+id/searchYearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toRightOf="@+id/searchMonthLabel"
+        android:layout_marginLeft="80dp" />
+
+    <Spinner
+        android:id="@+id/searchDayInput"
+        android:layout_width="113dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchDayLabel" />
+
+    <Spinner
+        android:id="@+id/searchMonthInput"
+        android:layout_width="113dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toRightOf="@+id/searchDayInput"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/searchYearInput"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchMonthLabel"
+        app:layout_constraintHorizontal_bias="0.538" />
+
+    <Spinner
+        android:id="@+id/searchYearInput"
+        android:layout_width="113dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchYearLabel" />
+
+    <Spinner
+        android:id="@+id/searchCategoryInput"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchCategoryLabel" />
+
+    <Spinner
+        android:id="@+id/searchUserInput"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchUserLabel" />
+
+    <Spinner
+        android:id="@+id/searchSubcategoryInput"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchSubcategoryLabel"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/searchButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="272dp"
+        android:layout_height="100dp"
+        android:text="Search"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchUserInput"
+        android:layout_marginRight="30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

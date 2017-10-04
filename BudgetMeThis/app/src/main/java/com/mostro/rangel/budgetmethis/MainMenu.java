@@ -28,4 +28,14 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent(this, SummaryPage.class);
         startActivity(intent);
     }
+
+    public void goToCounters(View view) {
+        Intent intent = new Intent(this, CountersPage.class);
+        startActivity(intent);
+    }
+
+    public void goToSearchParameters(View view) {
+        Intent intent = new Intent(this, SearchParametersPage.class);
+        startActivity(intent);
+    }
 }
