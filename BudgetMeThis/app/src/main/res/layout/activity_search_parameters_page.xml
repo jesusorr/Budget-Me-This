@@ -60,8 +60,10 @@
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="30dp"
-        app:layout_constraintLeft_toRightOf="@+id/searchDayLabel"
-        android:layout_marginLeft="80dp" />
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/searchYearLabel"
@@ -76,32 +78,32 @@
 
     <Spinner
         android:id="@+id/searchDayInput"
-        android:layout_width="113dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchDayLabel" />
 
     <Spinner
         android:id="@+id/searchMonthInput"
-        android:layout_width="113dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
-        app:layout_constraintLeft_toRightOf="@+id/searchDayInput"
         android:layout_marginLeft="8dp"
-        app:layout_constraintRight_toLeftOf="@+id/searchYearInput"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/searchMonthLabel"
-        app:layout_constraintHorizontal_bias="0.538" />
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintLeft_toRightOf="@+id/searchDayInput"
+        app:layout_constraintRight_toLeftOf="@+id/searchYearInput"
+        app:layout_constraintTop_toBottomOf="@+id/searchMonthLabel" />
 
     <Spinner
         android:id="@+id/searchYearInput"
-        android:layout_width="113dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="16dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchYearLabel" />
 
     <Spinner

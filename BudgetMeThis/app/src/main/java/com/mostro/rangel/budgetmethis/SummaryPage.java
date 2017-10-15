@@ -38,10 +38,9 @@ import java.util.stream.Collectors;
 
 public class SummaryPage extends AppCompatActivity {
 
-    private static String url_get_all_expenses = "http://192.168.0.10/get_all_expenses.php";
     private static String url_get_expenses_bymonthyear = "http://192.168.0.10/get_expenses_bymonthyear.php";
     List<String> months = Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-    //TODO: CHeck current year and add it to the list;
+    //TODO: Add a query to the pi that return all the years for all expenses
     List<String> years = Arrays.asList("2017");
 
     private int fullSalary = 5780;

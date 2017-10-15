@@ -1,7 +1,7 @@
 package com.mostro.rangel.budgetmethis;
 
 public enum Subcategories {
-    None("None"),
+    NONE("None"),
     GROCERIES("Groceries"),
     CLOTHING("Clothing"),
     VIDEO_GAMES("VideoGames"),
